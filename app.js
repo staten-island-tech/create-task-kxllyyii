@@ -1,41 +1,42 @@
 const wordArray = [
-  "artistic","alkaloid","aspiring",
-  "barefoot","barterer","botanist",
-  "cottager","catheter","cesspool",
-  "devoutly","demeanor","danseuse",
-  "edifying","enthrone","equalize",
-  "feasible","follicle","fourthly",
-  "glazing","graphics","gendarme",
-  "herdsman","huckster","homeward",
-  "incoming","immobile","interact",
-  "jostling","junkyard","jeweled",
-  "kilowatt","kangaroo","kedgeree",
-  "laminate","ligneous","logician",
-  "monoxide","macaroni","meekness",
-  "neatness","nontoxic","newsroom",
-  "overbold","ofttimes","optician",
-  "perforce","pilchard","prideful",
-  "quotient","quackery","quickset",
-  "reducing","reaffirm","rashness",
-  "stimulus","sneering","swerving",
-  "turbaned","twilight","thoracic",
-  "upstroke","unionism","ulterior",
-  "varicose","violator","villager",
-  "westward","wretched","wiriness",
-  "xenotime","xenology","xeronate",
-  "youthful","youngish","yeanling",
-  "zucchini","zincking","zoneless",
+  "art","amaranthaceae","aspiring",
+  "barefoot","barterer","beguilements",
+  "cottager","calamostachys","cesspool",
+  "delight","diaminogen","daily",
+  "edifying","electromagnetics","equalize",
+  "fore","follicle","framboesia",
+  "gally","graphics","guanabano",
+  "heart","hydrolytically","homewards",
+  "ice","immobile","intersocietal",
+  "junk","junkyard","jocooserie",
+  "kilo","kangaroo","khwarazmian",
+  "light","ligneous","leathercraft",
+  "monoxide","macaroni","miscarriage",
+  "neatness","negotiation","nope",
+  "overbold","organization","only",
+  "proud","prevalence","prideful",
+  "qualification","quackery","quit",
+  "reducing","reaccustoms","rude",
+  "stimulus","sneering","supernaturalist",
+  "turbaned","twilight","tetrapyramid",
+  "unanachronously","unionism","underscrub",
+  "vacuolations","violator","vite",
+  "west","wainscoting","wiriness",
+  "xanthophores","xenology","xolo",
+  "youth","youngish","yesternights",
+  "zucchini","zin","zincograph",
 ];
 
 const input = document.querySelector(".wordInput");
 const button1 = document.querySelector(".btn");
 const button2 = document.querySelector(".btnn");
-const button3 = document.querySelector(".logButton");
+const button3 = document.querySelector(".difficultyButton");
 const feedbackMessage = document.querySelector(".feedback-message");
 
-let currentRandomWord = getRandomWord();
+let currentRandomWord = RandomWord();
+let currentDifficulty = "";
 
-function getRandomWord() {
+function RandomWord() {
   const randomIndex = Math.floor(Math.random() * wordArray.length);
   return wordArray[randomIndex];
 }
@@ -44,11 +45,14 @@ function insert() {
   button1.addEventListener("click", (e) => {
     e.preventDefault();
     input.value = "";
-    currentRandomWord = getRandomWord();
+    currentRandomWord = RandomWord();
+
     document.querySelector("h3").textContent = currentRandomWord;
     feedbackMessage.textContent = "";
+
     setTimeout(() => {
       document.querySelector("h3").textContent = "";
+      document.querySelector("h5").textContent = "";
     }, 3000);
   });
 }
@@ -66,16 +70,30 @@ function submit() {
   });
 }
 
-function logWords() {
-  for (let i = 0; i < wordArray.length; i++) {
-    console.log("Word:", wordArray[i]);
+function WordAndDifficulty(word) {
+  let currentDifficulty;
+
+  console.log("Word:", word);
+
+  if (word.length < 7) {
+    currentDifficulty = "Level Difficulty: Easy";
+  } else if (word.length === 7) {
+    currentDifficulty = "Level Difficulty: Medium";
+  } else {
+    currentDifficulty = "Level Difficulty: Hard";
   }
+
+  console.log("Difficulty:", currentDifficulty);
+  return currentDifficulty;
 }
 
 button3.addEventListener("click", (e) => {
-  e.preventDefault()
-    logWords();
+  e.preventDefault();
+  currentDifficulty = WordAndDifficulty(currentRandomWord);
+  document.querySelector("h5").textContent = currentDifficulty;
 });
+
+
 
 insert();
 submit();
