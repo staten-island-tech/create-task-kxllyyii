@@ -93,7 +93,5 @@ button3.addEventListener("click", (e) => {
   document.querySelector("h5").textContent = currentDifficulty;
 });
 
-
-
 insert();
 submit();
